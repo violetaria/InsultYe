@@ -9,10 +9,33 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.getlosthere.insultye.MainActivity">
+    tools:context="com.getlosthere.insultye.activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1" android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:text="@string/throw_one"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="60dp"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp"
+            android:id="@+id/tvInsult"
+            android:background="@drawable/scroll" android:layout_weight="1.08"
+            android:textSize="14sp"/>
+        <Button
+            android:text="@string/throw_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnThrow"/>
+    </LinearLayout>
+
+
 </RelativeLayout>
+
