@@ -1,5 +1,6 @@
 package com.getlosthere.insultye.activities;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.getlosthere.insultye.R;
+import com.getlosthere.insultye.databinding.ActivityMainBinding;
 import com.getlosthere.insultye.models.DoubleAdjective;
 import com.getlosthere.insultye.models.Noun;
 import com.getlosthere.insultye.models.Salutation;
@@ -17,6 +19,7 @@ import com.getlosthere.insultye.models.SingleAdjective;
 public class MainActivity extends AppCompatActivity {
     Button btnThrowOne;
     TextView tvInsult;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.drawable.dragon_icon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        btnThrowOne = (Button) findViewById(R.id.btnThrow);
-        tvInsult = (TextView) findViewById(R.id.tvInsult);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        btnThrowOne = binding.btnThrow;
+        tvInsult = binding.tvInsult;
 
         btnThrowOne.setOnClickListener(new View.OnClickListener() {
             @Override

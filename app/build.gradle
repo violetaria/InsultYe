@@ -6,6 +6,7 @@ repositories {
 }
 
 android {
+    dataBinding.enabled = true
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
