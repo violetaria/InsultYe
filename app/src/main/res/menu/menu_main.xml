@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Edit insults"/>
-    <item android:title="Reset insults"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="@string/edit_insults"
+        android:id="@+id/miEditInsults"
+        app:showAsAction="never"/>
+    <item
+        android:title="@string/reset_insults"
+        android:id="@+id/miResultInsults"
+        app:showAsAction="never" />
 </menu>

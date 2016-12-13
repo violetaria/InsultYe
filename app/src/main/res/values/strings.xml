@@ -2,4 +2,6 @@
     <string name="app_name">InsultYe</string>
     <string name="throw_one">Throw One</string>
     <string name="intro_text">Click the button to throw a random insult!</string>
+    <string name="edit_insults">Edit insults</string>
+    <string name="reset_insults">Reset insults</string>
 </resources>

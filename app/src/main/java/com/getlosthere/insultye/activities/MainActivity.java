@@ -28,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.dragon_icon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         btnThrowOne = binding.btnThrow;
         tvInsult = binding.tvInsult;
         binding.setInsult(insult);
