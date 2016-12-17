@@ -5,6 +5,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,11 +35,28 @@ public class DoubleAdjective extends Model {
                 "RANDOM()").executeSingle();
     }
 
-    public static List<Noun> getAll() {
+    public static List<DoubleAdjective> getAll() {
         return new Select()
+                .distinct()
                 .from(DoubleAdjective.class)
+                .groupBy("Value")
                 .orderBy("Value ASC")
                 .execute();
+    }
+
+    public static ArrayList<String> getAllValues(){
+        List<DoubleAdjective> doubleAdjectives;
+        ArrayList<String> values = new ArrayList<>();
+        doubleAdjectives = new  Select()
+                .distinct()
+                .from(DoubleAdjective.class)
+                .groupBy("Value")
+                .orderBy("Value ASC")
+                .execute();
+        for(int i = 0; i < doubleAdjectives.size(); i++){
+            values.add(i,doubleAdjectives.get(i).getValue());
+        }
+        return values;
     }
 
 }

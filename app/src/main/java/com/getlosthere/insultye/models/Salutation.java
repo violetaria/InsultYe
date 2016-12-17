@@ -35,7 +35,9 @@ public class Salutation extends Model{
 
     public static List<Salutation> getAll() {
         return new  Select()
+                .distinct()
                 .from(Salutation.class)
+                .groupBy("Value")
                 .orderBy("Value ASC")
                 .execute();
     }
@@ -44,7 +46,9 @@ public class Salutation extends Model{
         List<Salutation> salutations;
         ArrayList<String> values = new ArrayList<>();
         salutations = new  Select()
+                .distinct()
                 .from(Salutation.class)
+                .groupBy("Value")
                 .orderBy("Value ASC")
                 .execute();
         for(int i = 0; i < salutations.size(); i++){

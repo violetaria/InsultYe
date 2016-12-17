@@ -37,7 +37,9 @@ public class Noun extends Model {
 
     public static List<Noun> getAll() {
         return new Select()
+                .distinct()
                 .from(Noun.class)
+                .groupBy("Value")
                 .orderBy("Value ASC")
                 .execute();
     }
@@ -47,7 +49,9 @@ public class Noun extends Model {
         List<Noun> nouns;
         ArrayList<String> values = new ArrayList<>();
         nouns = new  Select()
+                .distinct()
                 .from(Noun.class)
+                .groupBy("Value")
                 .orderBy("Value ASC")
                 .execute();
         for(int i = 0; i < nouns.size(); i++){
