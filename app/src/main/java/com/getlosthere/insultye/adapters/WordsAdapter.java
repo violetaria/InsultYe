@@ -16,6 +16,9 @@ import java.util.ArrayList;
  */
 
 public class WordsAdapter extends ArrayAdapter<String> {
+    private static class ViewHolder {
+        TextView tvValue;
+    }
 
     public WordsAdapter(Context context, ArrayList<String> words) {
         super(context, 0, words);
@@ -23,17 +26,19 @@ public class WordsAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-            // Get the data item for this position
-            String word = getItem(position);
-            // Check if an existing view is being reused, otherwise inflate the view
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_word, parent, false);
-            }
-            // Lookup view for data population
-            TextView tvValue = (TextView) convertView.findViewById(R.id.tvValue);
-            // Populate the data into the template view using the data object
-            tvValue.setText(word);
-            // Return the completed view to render on screen
-            return convertView;
+        String word = getItem(position);
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.item_word, parent, false);
+            viewHolder.tvValue = (TextView) convertView.findViewById(R.id.tvValue);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        viewHolder.tvValue.setText(word);
+
+        return convertView;
     }
 }
