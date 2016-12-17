@@ -5,6 +5,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,4 +42,17 @@ public class Noun extends Model {
                 .execute();
     }
 
+
+    public static ArrayList<String> getAllValues(){
+        List<Noun> nouns;
+        ArrayList<String> values = new ArrayList<>();
+        nouns = new  Select()
+                .from(Noun.class)
+                .orderBy("Value ASC")
+                .execute();
+        for(int i = 0; i < nouns.size(); i++){
+            values.add(i,nouns.get(i).getValue());
+        }
+        return values;
+    }
 }

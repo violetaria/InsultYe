@@ -5,6 +5,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +38,19 @@ public class Salutation extends Model{
                 .from(Salutation.class)
                 .orderBy("Value ASC")
                 .execute();
+    }
+
+    public static ArrayList<String> getAllValues(){
+        List<Salutation> salutations;
+        ArrayList<String> values = new ArrayList<>();
+        salutations = new  Select()
+                .from(Salutation.class)
+                .orderBy("Value ASC")
+                .execute();
+        for(int i = 0; i < salutations.size(); i++){
+            values.add(i,salutations.get(i).getValue());
+        }
+        return values;
     }
 
 }
