@@ -3,10 +3,11 @@ package com.getlosthere.insultye.activities;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import com.getlosthere.insultye.R;
 import com.getlosthere.insultye.adapters.WordsAdapter;
@@ -19,14 +20,14 @@ import com.getlosthere.insultye.models.SingleAdjective;
 import java.util.ArrayList;
 
 public class EditActivity extends AppCompatActivity {
-    ListView lvWords;
+    RecyclerView lvWords;
     ImageButton ibSalutation;
     ImageButton ibNoun;
     ImageButton ibSingleAdjective;
     ImageButton ibDoubleAdjective;
     private ActivityEditBinding binding;
     ArrayList<String> words;
-    ArrayAdapter<String> wordsAdapter;
+    WordsAdapter wordsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,40 +38,28 @@ public class EditActivity extends AppCompatActivity {
         ibSalutation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                words = Salutation.getAllValues();
-                wordsAdapter.clear();
-                wordsAdapter.addAll(words);
-                wordsAdapter.notifyDataSetChanged();
+                replaceWords(Salutation.getAllValues());
             }
         });
         ibNoun = binding.ibNoun;
         ibNoun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                words = Noun.getAllValues();
-                wordsAdapter.clear();
-                wordsAdapter.addAll(words);
-                wordsAdapter.notifyDataSetChanged();
+                replaceWords(Noun.getAllValues());
             }
         });
         ibSingleAdjective = binding.ibAdjective1;
         ibSingleAdjective.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                words = SingleAdjective.getAllValues();
-                wordsAdapter.clear();
-                wordsAdapter.addAll(words);
-                wordsAdapter.notifyDataSetChanged();
+                replaceWords(SingleAdjective.getAllValues());
             }
         });
         ibDoubleAdjective = binding.ibAdjective2;
         ibDoubleAdjective.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                words = DoubleAdjective.getAllValues();
-                wordsAdapter.clear();
-                wordsAdapter.addAll(words);
-                wordsAdapter.notifyDataSetChanged();
+                replaceWords(DoubleAdjective.getAllValues());
             }
         });
         words = new ArrayList<String>();
@@ -78,9 +67,17 @@ public class EditActivity extends AppCompatActivity {
     }
 
     private void populateWords() {
-        words = Noun.getAllValues();
         wordsAdapter = new WordsAdapter(this, words);
         lvWords.setAdapter(wordsAdapter);
+        lvWords.setLayoutManager(new LinearLayoutManager(this));
+        replaceWords(Salutation.getAllValues());
     }
 
+    private void replaceWords(ArrayList<String> newWords){
+        int oldSize = words.size();
+        words.clear();
+        wordsAdapter.notifyItemRangeRemoved(0,oldSize);
+        words.addAll(newWords);
+        wordsAdapter.notifyItemRangeInserted(0, newWords.size());
+    }
 }
