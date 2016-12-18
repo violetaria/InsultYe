@@ -37,7 +37,6 @@ public class Salutation extends Model{
         return new  Select()
                 .distinct()
                 .from(Salutation.class)
-                .groupBy("Value")
                 .orderBy("Value ASC")
                 .execute();
     }

@@ -60,4 +60,15 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.ViewHolder> 
     public int getItemCount() {
         return words.size();
     }
+
+    public void addItem(String word) {
+        words.add(word);
+        notifyItemInserted(words.size());
+    }
+
+    public void removeItem(int position) {
+        words.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, words.size());
+    }
 }
