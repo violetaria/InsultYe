@@ -22,10 +22,7 @@ import android.widget.ImageButton;
 import com.getlosthere.insultye.R;
 import com.getlosthere.insultye.adapters.WordsAdapter;
 import com.getlosthere.insultye.databinding.ActivityEditBinding;
-import com.getlosthere.insultye.models.DoubleAdjective;
-import com.getlosthere.insultye.models.Noun;
-import com.getlosthere.insultye.models.Salutation;
-import com.getlosthere.insultye.models.SingleAdjective;
+import com.getlosthere.insultye.models.Word;
 
 import java.util.ArrayList;
 
@@ -36,7 +33,7 @@ public class EditActivity extends AppCompatActivity {
     ImageButton ibSingleAdjective;
     ImageButton ibDoubleAdjective;
     private ActivityEditBinding binding;
-    ArrayList<String> words;
+    ArrayList<Word> words;
     WordsAdapter wordsAdapter;
     private View view;
     private Paint p = new Paint();
@@ -44,6 +41,12 @@ public class EditActivity extends AppCompatActivity {
     private boolean add;
     private EditText etWord;
     private int editPosition;
+    private final Integer SALUTATION = 1;
+    private final Integer SINGLE_ADJ = 2;
+    private final Integer DOUBLE_ADJ = 3;
+    private final Integer NOUN = 4;
+    Integer type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,31 +59,36 @@ public class EditActivity extends AppCompatActivity {
         ibSalutation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceWords(Salutation.getAllValues());
+                type = SALUTATION;
+                replaceWords(Word.getAll(SALUTATION));
             }
         });
         ibNoun = binding.ibNoun;
         ibNoun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceWords(Noun.getAllValues());
+                type = NOUN;
+                replaceWords(Word.getAll(NOUN));
             }
         });
         ibSingleAdjective = binding.ibAdjective1;
         ibSingleAdjective.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceWords(SingleAdjective.getAllValues());
+                type = SINGLE_ADJ;
+                replaceWords(Word.getAll(SINGLE_ADJ));
             }
         });
         ibDoubleAdjective = binding.ibAdjective2;
         ibDoubleAdjective.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceWords(DoubleAdjective.getAllValues());
+                type = DOUBLE_ADJ;
+                replaceWords(Word.getAll(DOUBLE_ADJ));
             }
         });
-        words = new ArrayList<String>();
+        words = new ArrayList<Word>();
+        type = SALUTATION;
         populateWords();
         initSwipe();
         initDialog();
@@ -90,10 +98,10 @@ public class EditActivity extends AppCompatActivity {
         wordsAdapter = new WordsAdapter(this, words);
         rvWords.setAdapter(wordsAdapter);
         rvWords.setLayoutManager(new LinearLayoutManager(this));
-        replaceWords(Salutation.getAllValues());
+        replaceWords(Word.getAll(type));
     }
 
-    private void replaceWords(ArrayList<String> newWords){
+    private void replaceWords(ArrayList<Word> newWords){
         int oldSize = words.size();
         words.clear();
         wordsAdapter.notifyItemRangeRemoved(0,oldSize);
@@ -114,12 +122,14 @@ public class EditActivity extends AppCompatActivity {
                 int position = viewHolder.getAdapterPosition();
 
                 if (direction == ItemTouchHelper.LEFT){
+                    Word word = words.get(position);
+                    word.delete();
                     wordsAdapter.removeItem(position);
                 } else {
                     removeView();
                     editPosition = position;
-                    alertDialog.setTitle("Edit Country");
-                    etWord.setText(words.get(position));
+                    alertDialog.setTitle("Edit Word");
+                    etWord.setText(words.get(position).getValue());
                     alertDialog.show();
                 }
             }
@@ -171,10 +181,12 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 if(add){
                     add = false;
-                    wordsAdapter.addItem(etWord.getText().toString());
+                    wordsAdapter.addItem(etWord.getText().toString(), type);
                     dialog.dismiss();
                 } else {
-                    words.set(editPosition,etWord.getText().toString());
+                    wordsAdapter.editItem(editPosition, etWord.getText().toString());
+                    // TODO edit word in DB - wordsAdapter.editItem(String )
+                    // words.set(editPosition,etWord.getText().toString());
                     wordsAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }

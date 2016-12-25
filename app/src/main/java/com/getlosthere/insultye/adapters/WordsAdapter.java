@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.getlosthere.insultye.R;
+import com.getlosthere.insultye.models.Word;
 
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.ViewHolder> 
         }
     }
 
-    private List<String> words;
+    private List<Word>words;
     private Context context;
 
-    public WordsAdapter(Context context, List<String> words) {
+    public WordsAdapter(Context context, List<Word> words) {
         this.words = words;
         this.context = context;
     }
@@ -51,9 +52,9 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(WordsAdapter.ViewHolder viewHolder, int position) {
-        String word = words.get(position);
+        Word word = words.get(position);
         TextView tvValue = viewHolder.tvValue;
-        tvValue.setText(word);
+        tvValue.setText(word.getValue());
     }
 
     @Override
@@ -61,14 +62,26 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.ViewHolder> 
         return words.size();
     }
 
-    public void addItem(String word) {
-        words.add(word);
+    public void addItem(String value, Integer type) {
+        Word newWord = new Word();
+        newWord.value = value;
+        newWord.type = type;
+        newWord.save();
+        words.add(newWord);
         notifyItemInserted(words.size());
     }
 
     public void removeItem(int position) {
+        Word word = words.get(position);
+        Word.delete(Word.class, word.getId());
         words.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, words.size());
+    }
+
+    public void editItem(int position, String value) {
+        Word word = words.get(position);
+        word.value = value;
+        word.save();
     }
 }

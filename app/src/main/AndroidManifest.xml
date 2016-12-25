@@ -13,14 +13,13 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="insultye_db.db"/>
+            android:value="insultye.db"/>
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="4"/>
+            android:value="2"/>
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.getlosthere.insultye.models.Salutation,com.getlosthere.insultye.models.Noun,com.getlosthere.insultye.models.SingleAdjective,com.getlosthere.insultye.models.DoubleAdjective"/>
-
+            android:value="com.getlosthere.insultye.models.Word"/>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

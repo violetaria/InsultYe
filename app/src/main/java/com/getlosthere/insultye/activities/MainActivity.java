@@ -13,16 +13,17 @@ import android.widget.TextView;
 
 import com.getlosthere.insultye.R;
 import com.getlosthere.insultye.databinding.ActivityMainBinding;
-import com.getlosthere.insultye.models.DoubleAdjective;
 import com.getlosthere.insultye.models.Insult;
-import com.getlosthere.insultye.models.Noun;
-import com.getlosthere.insultye.models.Salutation;
-import com.getlosthere.insultye.models.SingleAdjective;
+import com.getlosthere.insultye.models.Word;
 
 public class MainActivity extends AppCompatActivity {
     Button btnThrowOne;
     TextView tvInsult;
     Insult insult = new Insult();
+    private final Integer SALUTATION = 1;
+    private final Integer SINGLE_ADJ = 2;
+    private final Integer DOUBLE_ADJ = 3;
+    private final Integer NOUN = 4;
 
     private ActivityMainBinding binding;
 
@@ -45,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
         btnThrowOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Salutation salutation = Salutation.getRandom();
-                Noun noun = Noun.getRandom();
-                SingleAdjective singleAdjective = SingleAdjective.getRandom();
-                DoubleAdjective doubleAdjective = DoubleAdjective.getRandom();
+                Word salutation = Word.getRandom(SALUTATION);
+                Word noun = Word.getRandom(NOUN);
+                Word singleAdjective = Word.getRandom(SINGLE_ADJ);
+                Word doubleAdjective = Word.getRandom(DOUBLE_ADJ);
 
                 insult.setText(salutation,singleAdjective,doubleAdjective,noun);
                 binding.setInsult(insult);

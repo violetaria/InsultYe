@@ -16,10 +16,10 @@ public class Insult {
 
     }
 
-    public Insult(Salutation salutation,
-                  SingleAdjective singleAdj,
-                  DoubleAdjective doubleAdj,
-                  Noun noun) {
+    public Insult(Word salutation,
+                  Word singleAdj,
+                  Word doubleAdj,
+                  Word noun) {
             super();
             this.text = salutation.getValue() + " " +
                         singleAdj.getValue() + " " +
@@ -29,10 +29,10 @@ public class Insult {
 
     public void setText(String text) { this.text = text; }
 
-    public void setText(Salutation salutation,
-            SingleAdjective singleAdj,
-            DoubleAdjective doubleAdj,
-            Noun noun){
+    public void setText(Word salutation,
+            Word singleAdj,
+            Word doubleAdj,
+            Word noun){
         this.text = salutation.getValue() + " " +
                 singleAdj.getValue() + " " +
                 doubleAdj.getValue() + " " +
