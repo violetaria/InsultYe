@@ -1,8 +1,10 @@
 package com.getlosthere.insultye.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.getlosthere.insultye.R;
 import com.getlosthere.insultye.databinding.ActivityMainBinding;
+import com.getlosthere.insultye.helpers.DatabaseHelper;
 import com.getlosthere.insultye.models.Insult;
 import com.getlosthere.insultye.models.Word;
 
@@ -71,7 +74,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 return true;
             case R.id.miResultInsults:
-                // launch are you sure dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.reset_db);
+                builder.setMessage(R.string.are_you_sure);
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+                        databaseHelper.resetDatabase();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
             default:
                 return super.onOptionsItemSelected(item);
         }

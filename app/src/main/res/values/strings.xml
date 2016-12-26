@@ -8,4 +8,8 @@
     <string name="word_added">Word added successfully</string>
     <string name="word_changed">Word updated successfully</string>
     <string name="undo">Undo</string>
+    <string name="reset_db">This will reset all of the insults.</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
