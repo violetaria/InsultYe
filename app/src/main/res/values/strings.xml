@@ -4,4 +4,7 @@
     <string name="intro_text">Click the button to throw a random insult!</string>
     <string name="edit_insults">Edit insults</string>
     <string name="reset_insults">Reset insults</string>
+    <string name="word_deleted">Word deleted successfully</string>
+    <string name="word_added">Word added successfully</string>
+    <string name="word_changed">Word updated successfully</string>
 </resources>

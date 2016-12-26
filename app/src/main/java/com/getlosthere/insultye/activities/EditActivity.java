@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -136,6 +137,8 @@ public class EditActivity extends AppCompatActivity {
                     Word word = words.get(position);
                     word.delete();
                     wordsAdapter.removeItem(position);
+                    Snackbar.make(rvWords, R.string.word_deleted, Snackbar.LENGTH_LONG).show(); // Don’t forget to show!
+                            //.setAction(R.string.snackbar_action, myOnClickListener)
                 } else {
                     removeView();
                     editPosition = position;
@@ -194,10 +197,12 @@ public class EditActivity extends AppCompatActivity {
                     add = false;
                     wordsAdapter.addItem(etWord.getText().toString(), type);
                     dialog.dismiss();
+                    Snackbar.make(rvWords, R.string.word_added, Snackbar.LENGTH_LONG).show(); // Don’t forget to show!
                 } else {
                     wordsAdapter.editItem(editPosition, etWord.getText().toString());
                     wordsAdapter.notifyDataSetChanged();
                     dialog.dismiss();
+                    Snackbar.make(rvWords, R.string.word_changed, Snackbar.LENGTH_LONG).show(); // Don’t forget to show!
                 }
             }
         });
