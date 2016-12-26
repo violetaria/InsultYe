@@ -15,7 +15,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -56,6 +58,15 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
+
+        Toolbar toolbar = binding.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setLogo(R.drawable.dragon_icon);
+        //getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle(R.string.edit_insults);
+
         rvWords = binding.rvWords;
         fab = binding.fab;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +117,16 @@ public class EditActivity extends AppCompatActivity {
         initDialog();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void populateWords() {
         wordsAdapter = new WordsAdapter(this, words);
         rvWords.setAdapter(wordsAdapter);
@@ -154,7 +175,7 @@ public class EditActivity extends AppCompatActivity {
                                 }
                             })
                             .setActionTextColor(getResources().getColor(R.color.colorText))
-                            .show(); 
+                            .show();
                 } else {
                     removeView();
                     editPosition = position;
