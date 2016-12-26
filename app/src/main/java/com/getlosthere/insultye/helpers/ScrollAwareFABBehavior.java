@@ -16,7 +16,7 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
     public ScrollAwareFABBehavior(Context context, AttributeSet attrs) {
         super();
     }
-    
+
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout,
             FloatingActionButton child, View directTargetChild, View target, int nestedScrollAxes) {

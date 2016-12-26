@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,7 @@ public class EditActivity extends AppCompatActivity {
     ImageButton ibNoun;
     ImageButton ibSingleAdjective;
     ImageButton ibDoubleAdjective;
+    FloatingActionButton fab;
     private ActivityEditBinding binding;
     ArrayList<Word> words;
     WordsAdapter wordsAdapter;
@@ -54,7 +56,16 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
         rvWords = binding.rvWords;
-
+        fab = binding.fab;
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                removeView();
+                add = true;
+                alertDialog.setTitle("Add Word");
+                etWord.setText(null);
+                alertDialog.show();
+            }
+        });
         ibSalutation = binding.ibSalutation;
         ibSalutation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,8 +196,6 @@ public class EditActivity extends AppCompatActivity {
                     dialog.dismiss();
                 } else {
                     wordsAdapter.editItem(editPosition, etWord.getText().toString());
-                    // TODO edit word in DB - wordsAdapter.editItem(String )
-                    // words.set(editPosition,etWord.getText().toString());
                     wordsAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
