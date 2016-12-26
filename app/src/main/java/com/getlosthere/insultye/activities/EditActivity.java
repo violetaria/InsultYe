@@ -121,6 +121,11 @@ public class EditActivity extends AppCompatActivity {
         wordsAdapter.notifyItemRangeInserted(0, newWords.size());
     }
 
+
+    private void undoOnClickListener(){
+
+    }
+
     private void initSwipe(){
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
@@ -131,14 +136,25 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
+                final int position = viewHolder.getAdapterPosition();
 
                 if (direction == ItemTouchHelper.LEFT){
-                    Word word = words.get(position);
+                    final Word word = words.get(position);
                     word.delete();
                     wordsAdapter.removeItem(position);
-                    Snackbar.make(rvWords, R.string.word_deleted, Snackbar.LENGTH_LONG).show(); // Don’t forget to show!
-                            //.setAction(R.string.snackbar_action, myOnClickListener)
+                    Snackbar.make(rvWords, R.string.word_deleted, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.undo, new View.OnClickListener(){
+                                @Override
+                                public void onClick(View view){
+                                    Word oldWord = new Word(word.getValue(), type);
+                                    oldWord.save();
+                                    words.add(position, oldWord);
+                                    wordsAdapter.notifyItemInserted(position);
+                                    rvWords.scrollToPosition(position);
+                                }
+                            })
+                            .setActionTextColor(getResources().getColor(R.color.colorText))
+                            .show(); 
                 } else {
                     removeView();
                     editPosition = position;

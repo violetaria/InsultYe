@@ -7,4 +7,5 @@
     <string name="word_deleted">Word deleted successfully</string>
     <string name="word_added">Word added successfully</string>
     <string name="word_changed">Word updated successfully</string>
+    <string name="undo">Undo</string>
 </resources>
