@@ -2,4 +2,14 @@
     <string name="app_name">InsultYe</string>
     <string name="throw_one">Throw One</string>
     <string name="intro_text">Click the button to throw a random insult!</string>
+    <string name="edit_insults">Edit Insults</string>
+    <string name="reset_insults">Reset Insults</string>
+    <string name="word_deleted">Word deleted successfully</string>
+    <string name="word_added">Word added successfully</string>
+    <string name="word_changed">Word updated successfully</string>
+    <string name="undo">Undo</string>
+    <string name="reset_db">This will reset all of the insults.</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
