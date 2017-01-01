@@ -20,8 +20,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.getlosthere.insultye.R;
 import com.getlosthere.insultye.adapters.WordsAdapter;
@@ -32,10 +32,10 @@ import java.util.ArrayList;
 
 public class EditActivity extends AppCompatActivity {
     RecyclerView rvWords;
-    ImageButton ibSalutation;
-    ImageButton ibNoun;
-    ImageButton ibSingleAdjective;
-    ImageButton ibDoubleAdjective;
+    Button ibSalutation;
+    Button ibNoun;
+    Button ibSingleAdjective;
+    Button ibDoubleAdjective;
     FloatingActionButton fab;
     private ActivityEditBinding binding;
     ArrayList<Word> words;
@@ -63,8 +63,6 @@ public class EditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.drawable.dragon_icon);
-        //getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle(R.string.edit_insults);
 
         rvWords = binding.rvWords;

@@ -12,4 +12,8 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="adj_2">ADJ. 2</string>
+    <string name="adj_1">ADJ. 1</string>
+    <string name="noun">NOUN</string>
+    <string name="subject">Subject</string>
 </resources>

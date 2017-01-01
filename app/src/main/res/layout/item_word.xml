@@ -11,5 +11,8 @@
             android:id="@+id/tvValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Ye" />
+            tools:text="Ye"
+            android:textSize="25sp" android:fontFamily="cursive" android:textAlignment="viewStart"
+            android:layout_marginLeft="10dp" android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"/>
 </LinearLayout>
