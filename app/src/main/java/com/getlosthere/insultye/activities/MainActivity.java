@@ -18,6 +18,7 @@ import com.getlosthere.insultye.databinding.ActivityMainBinding;
 import com.getlosthere.insultye.helpers.DatabaseHelper;
 import com.getlosthere.insultye.models.Insult;
 import com.getlosthere.insultye.models.Word;
+import com.plattysoft.leonids.ParticleSystem;
 
 public class MainActivity extends AppCompatActivity {
     Button btnThrowOne;
@@ -49,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
         btnThrowOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Integer numberOfParticles = 50;
+                new ParticleSystem(MainActivity.this, numberOfParticles, R.drawable.fire, 600)
+                        .setSpeedRange(0.1f, 0.5f)
+                        .oneShot(tvInsult, numberOfParticles);
+                binding.setInsult(null);
+
                 Word salutation = Word.getRandom(SALUTATION);
                 Word noun = Word.getRandom(NOUN);
                 Word singleAdjective = Word.getRandom(SINGLE_ADJ);

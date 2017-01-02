@@ -24,14 +24,13 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="3">
+            android:layout_height="match_parent">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:text="@={insult.text}"
                 tools:text="@string/intro_text"
-                android:paddingTop="100dp"
+                android:paddingTop="175dp"
                 android:paddingLeft="100dp"
                 android:paddingRight="80dp"
                 android:id="@+id/tvInsult"
@@ -39,16 +38,16 @@
                 android:textSize="24sp"
                 android:textColor="@color/colorPrimaryText"
                 android:lineSpacingExtra="10dp"
-                android:layout_weight="2"/>
+                android:layout_weight="0.9"/>
             <Button
                 android:text="@string/throw_one"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:id="@+id/btnThrow"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:textColor="@color/colorText"
                 android:textSize="20sp"
-                android:layout_weight="1"/>
+                android:layout_weight="0.1"/>
         </LinearLayout>
     </LinearLayout>
 </layout>
