@@ -3,6 +3,7 @@ package com.getlosthere.insultye.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -35,20 +38,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Kingthings_Calligraphica_2.ttf");
+//        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Kingthings_Petrock.ttf");
 
         Toolbar toolbar = binding.toolbar;
+        TextView tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        tvToolbarTitle.setTypeface(font);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.dragon_icon);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayUseLogoEnabled(false);
 
         btnThrowOne = binding.btnThrow;
         tvInsult = binding.tvInsult;
         binding.setInsult(insult);
 
+        final Animation animScrollNewWord = AnimationUtils.loadAnimation(this, R.anim.scroll_new_word);
+        final Animation animScrollOldWord = AnimationUtils.loadAnimation(this, R.anim.scroll_old_word);
+        tvInsult.setTypeface(font);
+        btnThrowOne.setTypeface(font);
         btnThrowOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                AnimationSet replaceAnimation = new AnimationSet(false);
+//                replaceAnimation.setFillAfter(true);
+//                replaceAnimation.addAnimation(animScrollOldWord);
+
                 Word salutation = Word.getRandom(SALUTATION);
                 Word noun = Word.getRandom(NOUN);
                 Word singleAdjective = Word.getRandom(SINGLE_ADJ);
@@ -56,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                 insult.setText(salutation,singleAdjective,doubleAdjective,noun);
                 binding.setInsult(insult);
+                tvInsult.startAnimation(animScrollNewWord);
             }
         });
     }

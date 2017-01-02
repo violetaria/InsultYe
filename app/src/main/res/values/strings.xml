@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InsultYe</string>
+    <string name="app_name">Insult Ye</string>
     <string name="throw_one">Throw One</string>
     <string name="intro_text">Click the button to throw a random insult!</string>
     <string name="edit_insults">Edit Insults</string>
@@ -12,4 +12,8 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="adj_2">ADJ. 2</string>
+    <string name="adj_1">ADJ. 1</string>
+    <string name="noun">NOUN</string>
+    <string name="subject">Subject</string>
 </resources>
