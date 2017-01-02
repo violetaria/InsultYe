@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.getlosthere.insultye.R;
 import com.getlosthere.insultye.adapters.WordsAdapter;
@@ -52,18 +54,19 @@ public class EditActivity extends AppCompatActivity {
     private final Integer NOUN = 4;
     Integer type;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit);
-
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.edit_insults);
+        getSupportActionBar().setTitle(null);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Kingthings_Calligraphica_2.ttf");
+        TextView tvToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        tvToolbarTitle.setTypeface(font);
 
         rvWords = binding.rvWords;
         fab = binding.fab;
@@ -138,11 +141,6 @@ public class EditActivity extends AppCompatActivity {
         wordsAdapter.notifyItemRangeRemoved(0,oldSize);
         words.addAll(newWords);
         wordsAdapter.notifyItemRangeInserted(0, newWords.size());
-    }
-
-
-    private void undoOnClickListener(){
-
     }
 
     private void initSwipe(){
