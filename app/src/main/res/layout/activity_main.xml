@@ -50,7 +50,7 @@
                     android:paddingLeft="100dp"
                     android:paddingRight="80dp"
                     android:id="@+id/tvInsult"
-                    android:textSize="48sp"
+                    android:textSize="36sp"
                     android:textColor="@color/colorPrimaryText"
                     android:lineSpacingExtra="10dp"/>
             </LinearLayout>
